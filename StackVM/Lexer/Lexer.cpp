@@ -85,21 +85,64 @@ strings Lexer::lex(std::string stream) {
 			break;
 
 		case READBLOCK:
+
+			if (stream[streamIndex] == startChar && stream[streamIndex] != '"') {
+
+				balance++;
+				lexeme[lexemeIndex] = stream[streamIndex];
+				streamIndex++;
+				lexemeIndex++;
+			}
+
+			else if (stream[streamIndex] == endChar) {
+				balance--;
+				lexeme[lexemeIndex] = stream[streamIndex];
+				lexemeIndex++;
+				streamIndex++;
+				if(balance <= 0) state = DUMP;
+			}
+
+			else if (endChar == '"' && stream[streamIndex] == '\\')	i+=2; // TODO: Fix to actually record characters
+
+			else {
+				lexeme[lexemeIndex] = stream[streamIndex];
+				lexemeIndex++;
+				streamIndex++;
+			}
+
 			break;
 
 		case SKIP:
+			if(isSpace(stream[streamIndex])) streamIndex++;
+			else state = READCHAR;
+
 			break;
 
 		case DUMP:
+			if(lexemeIndex < 0) {
+				lexeme[lexemeIndex] = 0;
+				strlist.push_back(lexeme);
+				lexemeIndex = 0;
+
+			}
+			state = BEGIN;
 			break;
 
 		case COMMENT:
+			if(stream[streamIndex] != '\n') streamIndex++;
+			else state = READCHAR;
+
 			break;
 
 		case END:
+			streamIndex = len;
 			break;
 		}
 
+		if (lexemeIndex > 0) {
+			lexeme[lexemeIndex] = 0;
+			strlist.push_back(lexeme);
+		}
 	}
 
 	return strlist;
