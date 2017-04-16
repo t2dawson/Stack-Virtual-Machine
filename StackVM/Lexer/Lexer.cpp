@@ -147,3 +147,50 @@ strings Lexer::lex(std::string stream) {
 
 	return strlist;
 }
+
+// function defining what a space is
+bool Lexer::isSpace(char c) {
+
+	switch(c) {
+
+	case '\n':
+	case '\t':
+	case '\r':
+	case '\f':
+	case ' ':
+	case '\v':
+		return true;
+	default:
+		return false;
+	}
+}
+
+bool Lexer::isGroup(char c) {
+
+	startChar = c;
+	switch(c) {
+
+	case '"':
+		endChar = '"';
+		return true;
+	case '(':
+		endChar = ')';
+		return true;
+	case ')':
+		return true;
+	default:
+		return false;
+	}
+}
+
+bool Lexer::isSpecialChar(char c) {
+
+	switch(c) {
+
+	case '[':
+	case ']':
+		return true;
+	default:
+		return false;
+	}
+}

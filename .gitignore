@@ -1,0 +1,12 @@
+#remove all eclipse remote temp files
+
+RemoteSystemsTempFiles
+
+#dont include object files, eclipse project files and xml files
+*.o
+*.cproject
+*.xml
+
+#exclude meta data files
+
+.metadata/
