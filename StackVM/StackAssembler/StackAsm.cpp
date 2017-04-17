@@ -9,14 +9,15 @@
 #include <fstream>
 
 
-#include "../Lexer/Lexer.h"
+#include "Lexer.h"
 
+typedef int32_t i32;
 typedef uint32_t ui32;
 
-std::vector<ui32> compileToInstructions(strings lexeme);
+std::vector<i32> compileToInstructions(strings lexeme);
 bool isInteger(std::string instructionString);
-bool isPrimitive(std::string);
-ui32 mapToHex(std::string);
+//bool isPrimitive(std::string);
+i32 mapToHex(std::string);
 
 int main(int argc, char* argv[]) {
 
@@ -48,14 +49,14 @@ int main(int argc, char* argv[]) {
 	strings lexemes = lexer.lex(contents);
 
 	//compile lexemes to binary instructions
-	std::vector<ui32> instructions = compileToInstructions(lexemes);
+	std::vector<i32> instructions = compileToInstructions(lexemes);
 
 	//write the instructions to .bin file
 	std::ofstream outputFile;
 	outputFile.open("output.bin",std::ios::binary);
 
 	for(ui32 i = 0; i < instructions.size(); i++)
-		outputFile.write(reinterpret_cast<char*> (&instructions[i]),sizeof(ui32));
+		outputFile.write(reinterpret_cast<char*> (&instructions[i]),sizeof(i32));
 
 
 	outputFile.close();
@@ -63,16 +64,16 @@ int main(int argc, char* argv[]) {
 	return 0;
 }
 
-std::vector<ui32> compileToInstructions(strings lexeme) {
+std::vector<i32> compileToInstructions(strings lexeme) {
 
-	std::vector<ui32> instructions;
+	std::vector<i32> instructions;
 	for(ui32 i = 0; i < lexeme.size(); i++) {
 
 		if(isInteger(lexeme[i]))
 			instructions.push_back(std::stoi(lexeme[i]));
 		else {
 
-			ui32 instruction = mapToHex(lexeme[i]);
+			i32 instruction = mapToHex(lexeme[i]);
 			if(instruction != -1) instructions.push_back(instruction);
 			else {
 
@@ -95,7 +96,7 @@ bool isInteger(std::string instructionString) {
 	return true;
 }
 
-ui32 mapToHex(std::string operand) {
+i32 mapToHex(std::string operand) {
 	//TODO: Do comparison and mapping more efficiently
 	//TODO: Define operand constants
 

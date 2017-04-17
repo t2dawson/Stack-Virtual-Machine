@@ -37,7 +37,7 @@ class Lexer {
 public:
 	Lexer();
 	strings lex(std::string stream);
-	virtual ~Lexer();
+
 };
 
 #endif /* LEXER_H_ */

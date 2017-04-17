@@ -2,11 +2,15 @@
 
 RemoteSystemsTempFiles
 
-#dont include object files, eclipse project files and xml files
-*.o
+#dont include eclipse project files and xml files
 *.cproject
 *.xml
 
-#exclude meta data files
+#exclude settings and meta data files
 
+.settings/
 .metadata/
+
+#exclude build directory files (object files and executables/binaries)
+
+Build/

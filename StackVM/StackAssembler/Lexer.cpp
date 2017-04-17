@@ -28,7 +28,7 @@ strings Lexer::lex(std::string stream) {
 		case BEGIN:
 			if (isSpace(stream[streamIndex])) state = SKIP;
 
-			else if (isGroup(steam[streamIndex])) {
+			else if (isGroup(stream[streamIndex])) {
 
 				if(stream[streamIndex] == '"') {
 					lexeme[lexemeIndex] = stream[streamIndex];
@@ -38,7 +38,7 @@ strings Lexer::lex(std::string stream) {
 				state = READBLOCK;
 				}
 
-			else if(stream[streamIndex] == '/' && steam[streamIndex -1] == '/') {
+			else if(stream[streamIndex] == '/' && stream[streamIndex -1] == '/') {
 
 				streamIndex+=2;
 				state = COMMENT;
@@ -102,7 +102,7 @@ strings Lexer::lex(std::string stream) {
 				if(balance <= 0) state = DUMP;
 			}
 
-			else if (endChar == '"' && stream[streamIndex] == '\\')	i+=2; // TODO: Fix to actually record characters
+			else if (endChar == '"' && stream[streamIndex] == '\\')	streamIndex+=2; // TODO: Fix to actually record characters
 
 			else {
 				lexeme[lexemeIndex] = stream[streamIndex];
@@ -119,7 +119,7 @@ strings Lexer::lex(std::string stream) {
 			break;
 
 		case DUMP:
-			if(lexemeIndex < 0) {
+			if(lexemeIndex > 0) {
 				lexeme[lexemeIndex] = 0;
 				strlist.push_back(lexeme);
 				lexemeIndex = 0;
