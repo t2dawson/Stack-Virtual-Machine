@@ -11,6 +11,7 @@ RemoteSystemsTempFiles
 .settings/
 .metadata/
 
-#exclude build directory files (object files and executables/binaries)
+#exclude binary files and executables
 
-Build/
+*.bin
+find -executable
