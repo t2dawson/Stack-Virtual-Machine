@@ -14,4 +14,7 @@ RemoteSystemsTempFiles
 #exclude binary files and executables
 
 *.bin
-find -executable
+StackVM
+
+#exclude object files
+*.o

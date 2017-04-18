@@ -10,9 +10,9 @@
 
 #include <vector>
 #include <iostream>
-#define endl "\n"
 
 typedef int32_t i32;
+typedef uint32_t ui32;
 
 
 class VM {

@@ -26,7 +26,7 @@
 
 
 VM::VM() {
-	stack.reserve(1000000); // change in future
+	stack.reserve(1000000); // TODO change in future
 }
 
 i32 VM::getCodeType(i32 instruction) {
@@ -69,45 +69,45 @@ void VM::executePrimitive() {
 
 	case 0: { // the halt instruction
 
-		std::cout << "Halting Program" << endl;
+		std::cout << "Halting Program" << std::endl;
 		running = false;
 		break;
 	}
 
 	case 1: { //  add instruction
 
-		std::cout << "add " << stack[sp-1] << " and" << stack[sp] << endl;
+		std::cout << "add " << stack[sp-1] << " and" << stack[sp] << std::endl;
 
 		stack[sp - 1] += stack[sp];
 		sp--;
-		std::cout << stack[sp] << endl;
+		std::cout << stack[sp] << std::endl;
 		break;
 	 }
 
 	case 2: { //sub instruction
 
-		std::cout << "subtract" << stack[sp-1] << "and" <<stack[sp] << endl;
+		std::cout << "subtract" << stack[sp-1] << "and" <<stack[sp] << std::endl;
 		stack[sp-1] -= stack[sp];
 		sp--;
-		std::cout << stack[sp] << endl;
+		std::cout << stack[sp] << std::endl;
 		break;
 	}
 
 	case 3: { //multiply
 
-		std::cout << "multiply" << stack[sp-1] << "and" <<stack[sp] << endl;
+		std::cout << "multiply" << stack[sp-1] << "and" <<stack[sp] << std::endl;
 		stack[sp-1] *= stack[sp];
 		sp--;
-		std::cout << stack[sp] << endl;
+		std::cout << stack[sp] << std::endl;
 		break;
 	}
 
 	case 4: {
 
-		std::cout << "divide" << stack[sp-1] << "and" <<stack[sp] << endl;
+		std::cout << "divide" << stack[sp-1] << "and" <<stack[sp] << std::endl;
 		stack[sp-1] /= stack[sp];
 		sp--;
-		std::cout << stack[sp] << endl;;
+		std::cout << stack[sp] << std::endl;;
 		break;
 	}
 
@@ -127,7 +127,7 @@ void VM::run() {
 
 void VM::loadProgram(std::vector<i32> program) {
 
-	for (i32 i = 0; i < program.size(); i++) {
+	for (ui32 i = 0; i < program.size(); i++) {
 
 		// start at program counter
 		stack[pc+i] = program[i];

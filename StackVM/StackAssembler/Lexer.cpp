@@ -38,7 +38,7 @@ strings Lexer::lex(std::string stream) {
 				state = READBLOCK;
 				}
 
-			else if(stream[streamIndex] == '/' && stream[streamIndex -1] == '/') {
+			else if(stream[streamIndex] == '/' && stream[streamIndex + 1] == '/') {
 
 				streamIndex+=2;
 				state = COMMENT;
@@ -72,7 +72,7 @@ strings Lexer::lex(std::string stream) {
 				state = DUMP;
 			}
 
-			else if (stream[streamIndex] == '/' && stream[streamIndex-1] == '/') {
+			else if (stream[streamIndex] == '/' && stream[streamIndex + 1] == '/') {
 					streamIndex += 2;
 					state = COMMENT;
 			}
